@@ -1,0 +1,8 @@
+{
+  "name": "cheatsheets",
+  "private": true,
+  "description": "Generador de xuletes (cheatsheets) en .docx per a classe",
+  "dependencies": {
+    "docx": "^9.7.1"
+  }
+}

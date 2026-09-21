@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheatsheet 1: Conceptes Bàsics C#</title>
+    <!-- Tema fosc
+    <style>
+        :root {
+            --primary: #00b894; /* Verd per bucles */
+            --secondary: #55efc4;
+            --dark: #2d3436;
+            --code-bg: #2d3436;
+            --code-text: #f8f8f2;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; color: #333; padding: 20px; font-size: 13px; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; }
+        .container { column-count: 2; column-gap: 15px; }
+        @media (max-width: 900px) { .container { column-count: 1; } }
+        .card { background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; break-inside: avoid; border-top: 4px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 5px; font-size: 1.2em; color: var(--primary); }
+        pre { background: var(--code-bg); color: var(--code-text); padding: 10px; border-radius: 5px; overflow-x: auto; font-family: monospace; border-left: 3px solid #fd79a8; }
+        code { font-family: inherit; }
+        .kw { color: #ff79c6; } .str { color: #f1fa8c; } .num { color: #bd93f9; } .cls { color: #8be9fd; } .func { color: #50fa7b; } .com { color: #6272a4; }
+        .alert { background: #ffeaa7; color: #d35400; padding: 5px; border-radius: 4px; margin-top: 5px; font-weight: bold; font-size: 0.9em; }
+        /* --- CONFIGURACIÓ ESPECÍFICA D'IMPRESSIÓ --- */
+        @media print {
+            @page {
+                size: A4;     /* Forçar mida paper */
+                margin: 1cm;  /* Marges petits per aprofitar full */
+            }
+
+            body {
+                background-color: white;
+                font-size: 11px; /* Lletra una mica més petita per encabir-ho tot */
+                padding: 0;
+                /* FORÇAR COLORS DE FONS (IMPORTANT) */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .container {
+                column-count: 2 !important; /* IMPERATIU: 2 COLUMNES */
+                column-gap: 1cm;
+                display: block;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc; /* Borde simple per estalviar tinta o definició */
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            pre {
+                /* Opcional: Si vols estalviar tinta negra al fons del codi, descomenta això: */
+                /* background: #f0f0f0 !important; color: black !important; border: 1px solid #ddd; */
+            }
+            
+            /* Amagar coses innecessàries si n'hi hagués */
+            button, .no-print { display: none; }
+        }
+    </style>
+    -->
+    <!-- Tema clar-->
+<style>
+    :root {
+        /* COLORS PRINCIPALS */
+        --primary: #6c5ce7;   /* Verd fosc elegant */
+        --secondary: #a29bfe; /* Verd menta suau */
+        --dark: #2d3436;      /* Text general */
+        
+        /* CODI: FONS BLANC I TEXT FOSC */
+        --code-bg: #ffffff;   /* Fons BLANC pur */
+        --code-text: #1a1a1a; /* Text gairebé negre */
+        --code-border: #cccccc; /* Borde griset per delimitar */
+    }
+
+    body { 
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+        background: #ffffff; 
+        color: var(--dark); 
+        padding: 20px; 
+        font-size: 13px; 
+    }
+    
+    header { 
+        background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+        color: white; 
+        padding: 15px; 
+        border-radius: 8px; 
+        text-align: center; 
+        margin-bottom: 20px; 
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Perquè es llegeixi bé sobre el verd clar */
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+    }
+
+    /* COLUMNES */
+    .container { column-count: 2; column-gap: 15px; }
+    @media (max-width: 900px) { .container { column-count: 1; } }
+
+    /* TARGETES */
+    .card { 
+        background: white; 
+        border-radius: 8px; 
+        padding: 15px; 
+        margin-bottom: 15px; 
+        break-inside: avoid; 
+        border-top: 4px solid var(--primary); 
+        /* Ombra molt suau */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        border: 1px solid #e0e0e0;
+    }
+
+    h2 { 
+        margin-top: 0; 
+        border-bottom: 2px solid #f0f0f0; 
+        padding-bottom: 5px; 
+        font-size: 1.2em; 
+        color: var(--primary); 
+    }
+
+    /* ESTIL DEL BLOC DE CODI (FONS BLANC) */
+    pre { 
+        background: var(--code-bg);  /* BLANC */
+        color: var(--code-text);     /* FOSC */
+        padding: 10px; 
+        border-radius: 4px; 
+        overflow-x: auto; 
+        font-family: 'Consolas', 'Courier New', monospace; 
+        /* Afegim un borde perquè es distingeixi del fons de la targeta */
+        border: 1px solid var(--code-border);
+        border-left: 4px solid var(--primary); /* Decoració lateral */
+    }
+
+    code { font-family: inherit; }
+
+    /* COLORS DE SINTAXI (OPTIMITZATS PER A FONS BLANC) */
+    .kw { color: #0000ff; font-weight: bold; }  /* Keywords (int, if): BLAU */
+    .str { color: #a31515; }                    /* Strings: VERMELL FOSC */
+    .num { color: #098658; }                    /* Numbers: VERD OLIVA */
+    .cls { color: #2b91af; }                    /* Classes: CIAN FOSC */
+    .func { color: #74531f; font-weight: bold;} /* Functions: MARRÓ */
+    .com { color: #008000; font-style: italic;} /* Comments: VERD */
+
+    /* CAIXES D'ALERTA */
+    .alert { 
+        background: #fff8e1; /* Groc molt pàl·lid */
+        color: #856404; 
+        padding: 8px; 
+        border-radius: 4px; 
+        margin-top: 5px; 
+        font-weight: bold; 
+        font-size: 0.9em; 
+        border: 1px solid #ffeeba;
+    }
+    
+    table { width: 100%; border-collapse: collapse; font-size: 0.95em; margin-top: 5px; }
+    th, td { border-bottom: 1px solid #eee; padding: 5px; text-align: left; }
+    th { color: var(--primary); background-color: #f9f9f9; }
+
+    /* --- CONFIGURACIÓ IMPRESSIÓ (PDF) --- */
+    @media print {
+        @page { size: A4; margin: 1cm; }
+        
+        body { 
+            background-color: white; 
+            font-size: 11px; 
+            padding: 0; 
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact;
+        }
+
+        .container { 
+            column-count: 2 !important; 
+            column-gap: 0.8cm; 
+            display: block; 
+        }
+
+        .card { 
+            box-shadow: none; 
+            border: 1px solid #999; /* Borde més visible al PDF */
+            break-inside: avoid; 
+            page-break-inside: avoid; 
+        }
+
+        pre { 
+            background: #ffffff !important; /* Forçar blanc al PDF */
+            border: 1px solid #ccc; 
+        }
+        
+        button, .no-print { display: none; }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>📘 Cheatsheet 1: Conceptes Bàsics</h1>
+        <p>Variables, Operadors, Math, Funcions i Condicionals</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>1. Estructura Bàsica i E/S</h2>
+            <pre><code><span class="kw">static void</span> <span class="func">Main</span>(<span class="kw">string</span>[] args) {
+    <span class="com">// SORTIDA</span>
+    <span class="cls">Console</span>.<span class="func">Write</span>(<span class="str">"Sense salt"</span>);
+    <span class="cls">Console</span>.<span class="func">WriteLine</span>(<span class="str">"Amb salt"</span>);
+    
+    <span class="com">// ENTRADA (Sempre retorna string)</span>
+    <span class="kw">string</span> s = <span class="cls">Console</span>.<span class="func">ReadLine</span>();
+    
+    <span class="com">// NETEJA</span>
+    <span class="cls">Console</span>.<span class="func">Clear</span>();
+}</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>2. Constants, Variables i Tipus</h2>
+            <table>
+                <tr><th>Tipus</th><th>Exemple</th><th>Conversió</th></tr>
+                <tr><td><code>int</code></td><td>10, -5</td><td><code>Convert.ToInt32(s)</code></td></tr>
+                <tr><td><code>double</code></td><td>9.99</td><td><code>Convert.ToDouble(s)</code></td></tr>
+                <tr><td><code>string</code></td><td>"Hola"</td><td>-</td></tr>
+                <tr><td><code>char</code></td><td>'A'</td><td><code>Convert.ToChar(s)</code></td></tr>
+                <tr><td><code>bool</code></td><td>true</td><td><code>Convert.ToBoolean(s)</code></td></tr>
+            </table>
+            <p><strong>Constants:</strong> <code>const double PI = 3.1416;</code></p>
+            
+            <h3>Límits (Min/Max Values)</h3>
+            <p>Útils per inicialitzar cerques de màxims/mínims.</p>
+            <pre><code><span class="kw">int</span> maximPossible = <span class="kw">int</span>.MaxValue; <span class="com">// 2,147,483,647</span>
+<span class="kw">int</span> minimPossible = <span class="kw">int</span>.MinValue; <span class="com">// -2,147,483,648</span></code></pre>
+        </div>
+
+        <div class="card">
+            <h2>3. Operadors i Precedència</h2>
+            <p>Ordre d'execució de dalt a baix (prioritat).</p>
+            <table>
+                <tr><th>Prioritat</th><th>Tipus</th><th>Operadors</th></tr>
+                <tr><td>1 (Max)</td><td>Parèntesis</td><td><code>( )</code></td></tr>
+                <tr><td>2</td><td>Unaris</td><td><code>++</code>, <code>--</code>, <code>!</code> (NOT), <code>-</code> (negatiu)</td></tr>
+                <tr><td>3</td><td>Multiplicatius</td><td><code>*</code>, <code>/</code>, <code>%</code> (Mòdul)</td></tr>
+                <tr><td>4</td><td>Additius</td><td><code>+</code>, <code>-</code></td></tr>
+                <tr><td>5</td><td>Relacionals</td><td><code><</code>, <code>></code>, <code><=</code>, <code>>=</code></td></tr>
+                <tr><td>6</td><td>Igualtat</td><td><code>==</code>, <code>!=</code></td></tr>
+                <tr><td>7</td><td>Lògic AND</td><td><code>&&</code></td></tr>
+                <tr><td>8</td><td>Lògic OR</td><td><code>||</code></td></tr>
+                <tr><td>9 (Min)</td><td>Assignació</td><td><code>=</code>, <code>+=</code>, <code>-=</code></td></tr>
+            </table>
+            <div class="alert">⚠️ El Mòdul (%) dóna el residu: 10 % 3 = 1</div>
+        </div>
+
+        <div class="card">
+            <h2>4. Math i Aleatoris</h2>
+            <p><strong>Aleatoris:</strong></p>
+            <pre><code><span class="cls">Random</span> rnd = <span class="kw">new</span> <span class="cls">Random</span>(); <span class="com">// Declarar 1 cop</span>
+<span class="kw">int</span> dau = rnd.<span class="func">Next</span>(<span class="num">1</span>, <span class="num">7</span>);  <span class="com">// Entre 1 i 6</span></code></pre>
+            
+            <p><strong>Funcions Habituals:</strong></p>
+            <ul>
+                <li><code>Math.Abs(x)</code>: Valor absolut.</li>
+                <li><code>Math.Pow(b, e)</code>: Potència.</li>
+                <li><code>Math.Sqrt(x)</code>: Arrel quadrada.</li>
+                <li><code>Math.Round(x, 2)</code>: Arrodonir decimals.</li>
+            </ul>
+
+            <p><strong>Exemple: Distància entre 2 punts</strong></p>
+            <p>Formula: dist = ArrelQuadrada((x2-x1)^2 + (y2-y1)^2)</p>
+            <pre><code><span class="kw">double</span> dx = x2 - x1;
+<span class="kw">double</span> dy = y2 - y1;
+<span class="kw">double</span> dist = <span class="cls">Math</span>.<span class="func">Sqrt</span>(<span class="cls">Math</span>.<span class="func">Pow</span>(dx, <span class="num">2</span>) 
+                       + <span class="cls">Math</span>.<span class="func">Pow</span>(dy, <span class="num">2</span>));</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>5. Condicionals</h2>
+            <pre><code><span class="kw">if</span> (nota >= <span class="num">9</span>) 
+{
+    <span class="cls">Console</span>.<span class="func">WriteLine</span>(<span class="str">"Excel·lent"</span>);
+}
+<span class="kw">else if</span> (nota >= <span class="num">5</span>) 
+{
+    <span class="cls">Console</span>.<span class="func">WriteLine</span>(<span class="str">"Aprovat"</span>);
+}
+<span class="kw">else</span> 
+{
+    <span class="cls">Console</span>.<span class="func">WriteLine</span>(<span class="str">"Suspens"</span>);
+}</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>6. Funcions (Mètodes)</h2>
+            <p>Permeten reutilitzar codi i separar lògica.</p>
+            <pre><code><span class="com">// 1. DEFINICIÓ (Fora del Main)</span>
+<span class="kw">public static double</span> <span class="func">CalculaArea</span>(<span class="kw">double</span> radi) 
+{
+    <span class="kw">return</span> <span class="cls">Math</span>.PI * <span class="cls">Math</span>.<span class="func">Pow</span>(radi, <span class="num">2</span>);
+}
+
+<span class="com">// 2. CRIDA (Dins del Main)</span>
+<span class="kw">double</span> area = <span class="func">CalculaArea</span>(<span class="num">5.5</span>);</code></pre>
+        </div>
+    </div>
+</body>
+</html>
