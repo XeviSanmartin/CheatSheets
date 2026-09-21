@@ -1,0 +1,5 @@
+{
+  // Tinymist (Typst): fonts del repositori i PDF en desar
+  "tinymist.fontPaths": ["${workspaceFolder}/tools/fonts"],
+  "tinymist.exportPdf": "onSave"
+}
