@@ -310,35 +310,6 @@
   d'un bucle de lectura val més `int.TryParse`.]
 ]
 
-// Tanca el full a tota l'amplada: el quadre de decisió i els bucles infinits.
-#ample(title: [13 · Quin esquema necessito?], color: vermell, pos: bottom)[
-  #set text(size: 11.9pt)
-  #grid(
-    columns: (1.25fr, 1fr), column-gutter: 12pt,
-    taula(
-      (1fr, auto),
-      th[La situació], th[L'esquema],
-      [Sé quantes voltes he de fer], [`for` (#ref-targeta(2))],
-      [Llegeixo fins a una marca de final], [`while` (#ref-targeta(1))],
-      [Com a mínim una volta (menús)], [`do…while` (#ref-targeta(3))],
-      [Busco una dada concreta], [cerca amb `&&` (#ref-targeta(4))],
-      [Recorro un fitxer sencer], [`while` amb `null` (#ref-targeta(7))],
-      [Taules, graelles o figures], [aniuats (#ref-targeta(6))],
-    ),
-    [
-      #text(font: titular, size: 13.8pt, fill: vermell-f)[Per què es penja el programa?]
-      #v(-3pt)
-      - Falta la lectura dins del bucle: la condició no canvia mai.
-      - Hi ha un `;` just darrere del `while (...)` o del `for (...)`.
-      - Oblides `i++`, o modifiques `i` dins del cos sense voler.
-      - La condició no es pot complir mai: `while (i >= 0)` amb `i++`.
-      #v(1pt)
-      #text(size: 11.3pt, fill: ink-suau)[Atura'l amb Ctrl+C i mira quina de les quatre parts de
-      l'esquema t'has deixat.]
-    ],
-  )
-]
-
 #seccio("Comptadors, acumuladors i trucs", color: taronja)
 
 #card(11, "Comptar, acumular, màxim i mínim", color: taronja)[
@@ -399,4 +370,27 @@
   ```
   #avis[Sense la variable auxiliar perds un dels dos valors: `a = b;` ja esborra el que hi havia a
   `a`.]
+]
+
+#ample(title: [13 · Quin esquema necessito?], color: vermell)[
+  #set text(size: 11.9pt)
+  #taula(
+    (1fr, auto),
+    th[La situació], th[L'esquema],
+    [Sé quantes voltes he de fer], [`for` (#ref-targeta(2))],
+    [Llegeixo fins a una marca de final], [`while` (#ref-targeta(1))],
+    [Com a mínim una volta (menús)], [`do…while` (#ref-targeta(3))],
+    [Busco una dada concreta], [cerca amb `&&` (#ref-targeta(4))],
+    [Recorro un fitxer sencer], [`while` amb `null` (#ref-targeta(7))],
+    [Taules, graelles o figures], [aniuats (#ref-targeta(6))],
+  )
+  #text(font: titular, size: 13.8pt, fill: vermell-f)[Per què es penja el programa?]
+  #v(-3pt)
+  - Falta la lectura dins del bucle: la condició no canvia mai.
+  - Hi ha un `;` just darrere del `while (...)` o del `for (...)`.
+  - Oblides `i++`, o modifiques `i` dins del cos sense voler.
+  - La condició no es pot complir mai: `while (i >= 0)` amb `i++`.
+  #v(1pt)
+  #text(size: 11.3pt, fill: ink-suau)[Atura'l amb Ctrl+C i mira quina de les quatre parts de
+  l'esquema t'has deixat.]
 ]

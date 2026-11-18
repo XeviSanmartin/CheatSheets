@@ -1098,9 +1098,9 @@
   funcions es copien a dalt del programa.
   #sub[Línia a línia (amb readLine)]
   ```kotlin
-  private fun llegir() = readLine()!!   // no en diguis readln:
-  private fun llegirInt() = llegir().toInt()  // xocaria amb
-  private fun llegirBigInt(radix: Int = 10) = // la de Kotlin
+  private fun llegir() = readLine()!!  // no la diguis
+  private fun llegirInt() = llegir().toInt()  // readln: ja
+  private fun llegirBigInt(radix: Int = 10) =  // existeix
       llegir().toBigInteger(radix)
 
   private fun lineSequence(limit: Int = Int.MAX_VALUE) =

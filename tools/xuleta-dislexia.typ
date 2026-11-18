@@ -296,7 +296,8 @@
     inset: (x: 11pt, top: 9pt, bottom: 10pt),
   )[
     #_accent.update(c)
-    #block(below: 8pt, width: 100%)[
+    // sticky: el títol no es queda sol al peu de la pàgina.
+    #block(below: 8pt, width: 100%, sticky: true)[
       #grid(columns: (auto, 1fr), column-gutter: 9pt, align: horizon,
         box(fill: ink, radius: 4pt, inset: (x: 7pt, y: 4pt),
           text(font: titular, size: 14pt, fill: white)[#num]),
@@ -348,7 +349,9 @@
       stroke: (x, y) => if y == 0 { (bottom: 1pt + fosc(c)) } else { (top: 0.4pt + c.lighten(80%)) },
       align: horizon,
       fill: (x, y) => if y == 0 { c.lighten(88%) } else if calc.even(y) { c.lighten(95%) } else { paper-targeta },
-      ..files,
+      // La primera fila és capçalera: no es queda sola al peu i es repeteix si la taula es parteix.
+      table.header(..files.pos().slice(0, cols.len())),
+      ..files.pos().slice(cols.len()),
     ),
   )
 }
@@ -363,7 +366,7 @@
       columns: (1fr, 1fr), inset: (x: 8pt, y: 6pt), align: horizon,
       stroke: (x, y) => if y == 0 { (bottom: 1pt + fosc(c)) } else { (top: 0.4pt + c.lighten(80%)) },
       fill: (x, y) => if y == 0 { c.lighten(88%) } else if calc.even(y) { c.lighten(95%) } else { paper-targeta },
-      text(fill: fosc(c), weight: "bold")[#esquerra], text(fill: fosc(c), weight: "bold")[#dreta],
+      table.header(text(fill: fosc(c), weight: "bold")[#esquerra], text(fill: fosc(c), weight: "bold")[#dreta]),
       ..parells.pos().map(((a, b)) => (cel(a, ink-suau.darken(10%)), cel(b, fosc(c)))).flatten(),
     ),
   )
@@ -526,13 +529,20 @@
       box(fill: ink, radius: 6pt, inset: (x: 12pt, y: 10pt),
         text(font: titular, size: 24pt, fill: white)[#badge]),
       [
-        #text(font: titular, size: 28pt, fill: ink)[#title]
+        // El títol s'encongeix (fins a 20 pt) perquè càpiga en una sola línia.
+        #layout(sz => {
+          let mida = 28pt
+          while mida > 20pt and measure(text(font: titular, size: mida)[#title]).width > sz.width {
+            mida -= 1pt
+          }
+          text(font: titular, size: mida, fill: ink)[#title]
+        })
         #if subtitle != none {
-          v(-10pt)
+          v(-4pt)
           text(size: 12pt, fill: ink-suau)[#subtitle]
         }
         #if serie != "" {
-          v(-8pt)
+          v(-2pt)
           text(size: 10.5pt, fill: ink-suau)[#serie]
         }
         #if tags.len() > 0 {

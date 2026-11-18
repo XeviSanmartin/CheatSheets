@@ -34,36 +34,29 @@
 // Diccionari ràpid a tota l'amplada, a la primera pàgina
 #ample(title: [Diccionari ràpid: de C\# a Kotlin], color: violeta)[
   #let d(a, b, c) = (text(size: 10.6pt, a), text(font: mono, size: 10pt, features: (calt: 0), fill: ink-suau.darken(10%), b), text(font: mono, size: 10pt, features: (calt: 0), weight: "bold", fill: violeta-f, c))
-  #grid(
-    columns: (1fr, 1fr), column-gutter: 10pt,
-    taula(
-      (auto, 1fr, 1fr),
-      th[Què], th[C\#], th[Kotlin],
-      ..d[Escriure][Console.WriteLine(x)][println(x)],
-      ..d[Llegir línia][Console.ReadLine()][readlnOrNull()],
-      ..d[Interpolació][\$"Hola {nom}"][\"Hola \$nom\"],
-      ..d[Variable / const.][var x / const][var x / val x],
-      ..d[Tipus darrere][int x = 1;][val x: Int = 1],
-      ..d[Sense retorn][void][Unit (o res)],
-      ..d[Ternari][c ? a : b][if (c) a else b],
-      ..d[switch][switch / case][when / ->],
-      ..d[for][for (i=0; i\<n; i++)][for (i in 0 until n)],
-      ..d[foreach][foreach (var x in l)][for (x in l)],
-    ),
-    taula(
-      (auto, 1fr, 1fr),
-      th[Què], th[C\#], th[Kotlin],
-      ..d[Fusió amb null][a ?? b][a ?: b],
-      ..d[Perdó de null][a!.Length][a!!.length],
-      ..d[Crear objecte][new Persona()][Persona()],
-      ..d[Herència][class B : A][class B : A()],
-      ..d[Mètode virtual][virtual / override][open / override],
-      ..d[static][static][companion object],
-      ..d[Llista][List\<int\>][MutableList\<Int\>],
-      ..d[Diccionari][Dictionary\<K, V\>][MutableMap\<K, V\>],
-      ..d[LINQ][Where / Select][filter / map],
-      ..d[using][using (...) { }][x.use { }],
-    ),
+  #taula(
+    (auto, 1fr, 1fr),
+    th[Què], th[C\#], th[Kotlin],
+    ..d[Escriure][Console.WriteLine(x)][println(x)],
+    ..d[Llegir línia][Console.ReadLine()][readlnOrNull()],
+    ..d[Interpolació][\$"Hola {nom}"][\"Hola \$nom\"],
+    ..d[Variable / const.][var x / const][var x / val x],
+    ..d[Tipus darrere][int x = 1;][val x: Int = 1],
+    ..d[Sense retorn][void][Unit (o res)],
+    ..d[Ternari][c ? a : b][if (c) a else b],
+    ..d[switch][switch / case][when / ->],
+    ..d[for][for (i=0; i\<n; i++)][for (i in 0 until n)],
+    ..d[foreach][foreach (var x in l)][for (x in l)],
+    ..d[Fusió amb null][a ?? b][a ?: b],
+    ..d[Perdó de null][a!.Length][a!!.length],
+    ..d[Crear objecte][new Persona()][Persona()],
+    ..d[Herència][class B : A][class B : A()],
+    ..d[Mètode virtual][virtual / override][open / override],
+    ..d[static][static][companion object],
+    ..d[Llista][List\<int\>][MutableList\<Int\>],
+    ..d[Diccionari][Dictionary\<K, V\>][MutableMap\<K, V\>],
+    ..d[LINQ][Where / Select][filter / map],
+    ..d[using][using (...) { }][x.use { }],
   )
 ]
 
@@ -926,6 +919,8 @@
   #nota[A Windows, l'Enter pot arribar com a dos caràcters: `\r\n`.]
 ]
 
+#pagebreak(weak: true)
+
 #card(24, "Llegir de la consola", color: cian)[
   Es pot fer servir la classe `Scanner` de Java, que permet llegir diferents tipus de dades:
   ```kotlin
@@ -1100,9 +1095,9 @@
   funcions es copien a dalt del programa.
   #sub[Línia a línia (amb readLine)]
   ```kotlin
-  private fun llegir() = readLine()!!   // no en diguis readln:
-  private fun llegirInt() = llegir().toInt()  // xocaria amb
-  private fun llegirBigInt(radix: Int = 10) = // la de Kotlin
+  private fun llegir() = readLine()!!  // no la diguis
+  private fun llegirInt() = llegir().toInt()  // readln: ja
+  private fun llegirBigInt(radix: Int = 10) =  // existeix
       llegir().toBigInteger(radix)
 
   private fun lineSequence(limit: Int = Int.MAX_VALUE) =

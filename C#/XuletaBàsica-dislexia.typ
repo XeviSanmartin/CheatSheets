@@ -339,29 +339,6 @@
   ```
 ]
 
-// Tanca el full a tota l'amplada: és la targeta que més es consulta.
-#ample(title: [13 · Errors del compilador i trampes], color: vermell, pos: bottom)[
-  #grid(
-    columns: (1.15fr, 1fr), column-gutter: 12pt,
-    taula(
-      (auto, 1fr),
-      th[Codi], th[Què t'està dient],
-      pill(fill: vermell-f)[CS8600], [Assignes un possible null a una variable sense `?`.],
-      pill(fill: vermell-f)[CS8602], [Uses una variable que pot ser null sense comprovar-la.],
-      pill(fill: vermell-f)[CS8625], [Assignes `null` a un tipus que no admet null.],
-      pill(fill: vermell-f)[CS0165], [Uses una variable abans de donar-li cap valor.],
-    ),
-    [
-      #text(font: titular, size: 13.8pt, fill: vermell-f)[Trampes freqüents]
-      #v(-3pt)
-      - `=` assigna i `==` compara; `10 / 3` dona `3`, no `3.33`.
-      - `Console.ReadLine()` retorna `string?`, no `string`.
-      - C\# distingeix majúscules: `Edat` i `edat` són variables diferents.
-      - Posar `?` a tot «perquè no es queixi» només trasllada el problema.
-    ],
-  )
-]
-
 #card(11, "Condicionals", color: indi)[
   ```cs
   if (nota >= 9)
@@ -443,4 +420,23 @@
   ```
   #sortida[Hola, Anna!]
   #nota[Si un paràmetre pot arribar buit, declara'l amb `?`: `void Saluda(string? nom)`.]
+]
+
+#pagebreak(weak: true)
+
+#ample(title: [13 · Errors del compilador i trampes], color: vermell)[
+  #taula(
+    (auto, 1fr),
+    th[Codi], th[Què t'està dient],
+    pill(fill: vermell-f)[CS8600], [Assignes un possible null a una variable sense `?`.],
+    pill(fill: vermell-f)[CS8602], [Uses una variable que pot ser null sense comprovar-la.],
+    pill(fill: vermell-f)[CS8625], [Assignes `null` a un tipus que no admet null.],
+    pill(fill: vermell-f)[CS0165], [Uses una variable abans de donar-li cap valor.],
+  )
+  #text(font: titular, size: 13.8pt, fill: vermell-f)[Trampes freqüents]
+  #v(-3pt)
+  - `=` assigna i `==` compara; `10 / 3` dona `3`, no `3.33`.
+  - `Console.ReadLine()` retorna `string?`, no `string`.
+  - C\# distingeix majúscules: `Edat` i `edat` són variables diferents.
+  - Posar `?` a tot «perquè no es queixi» només trasllada el problema.
 ]
